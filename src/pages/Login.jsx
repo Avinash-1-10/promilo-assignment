@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { SHA256 } from "crypto-js";
 import { useNavigate } from "react-router-dom";
+import "../styles/login.css"
 
 const Login = ({ setAccessToken }) => {
   const navigate = useNavigate()

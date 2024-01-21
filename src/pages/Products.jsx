@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 import Navbar from "../components/Navbar"
+import "../styles/products.css"
 
 const Products = ({ accessToken }) => {
   const [products, setProducts] = useState([]);

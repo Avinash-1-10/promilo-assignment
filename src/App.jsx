@@ -15,7 +15,7 @@ const App = () => {
     <div>
       <Router>
         <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route
             path="/products"
             element={
@@ -28,12 +28,9 @@ const App = () => {
           />
           <Route
             path="/login"
-            element={<Login setAccessToken={setAccessToken}/>}
+            element={<Login setAccessToken={setAccessToken} />}
           />
-          <Route
-            path="/about"
-            element={<About/>}
-          />
+          <Route path="/about" element={<About />} />
         </Routes>
       </Router>
     </div>
