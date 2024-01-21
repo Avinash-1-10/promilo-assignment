@@ -66,7 +66,7 @@ const About = () => {
               <strong>Clone the Repository:</strong>
               <p>
                 git clone
-                url from github
+                https://github.com/Avinash-1-10/promilo-assignment.git
               </p>
             </li>
             <li>
