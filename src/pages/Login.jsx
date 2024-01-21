@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { SHA256 } from "crypto-js";
 import { useNavigate } from "react-router-dom";
-import "../styles/login.css"
+import "../styles/login.css";
 
 const Login = ({ setAccessToken }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   function hashPassword(password) {
     const hash = SHA256(password).toString();
     return hash;
@@ -18,6 +20,8 @@ const Login = ({ setAccessToken }) => {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
+
     const formData = new FormData();
     formData.append("username", data.email);
     formData.append("password", hashPassword(data.password));
@@ -34,13 +38,19 @@ const Login = ({ setAccessToken }) => {
           },
         }
       );
+
+      if (!response.ok) {
+        throw new Error("Failed to log in");
+      }
+
       const result = await response.json();
       setAccessToken(result.response.access_token);
-      navigate("/products")
+      navigate("/products");
     } catch (error) {
       console.error("Error during login:", error.message);
+    } finally {
+      setLoading(false);
     }
-
   };
 
   return (
@@ -85,8 +95,8 @@ const Login = ({ setAccessToken }) => {
           />
           {errors.password && <p>{errors.password.message}</p>}
         </div>
-        <button type="submit" className="login-button">
-          Login
+        <button type="submit" className="login-button" disabled={loading}>
+          {loading ? "Loading..." : "Login"}
         </button>
       </form>
     </div>
